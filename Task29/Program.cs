@@ -1,2 +1,47 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿/* Задача 29: Напишите программу, которая задаёт
+массив из 8 элементов, заполненный
+псевдослучайными числами и выводит их на экран. */
+
+//Использовал код из семинарского занятия, так как он показался наиболее оптимальным, только дополнил его возможностью выбора диапазона псевдослучайных чисел
+
+//запрашиваем ввод максимального значения псевдослучайного числа для элемента массива
+Console.Clear();
+Console.WriteLine("Введите максимальное целое значение псевдослучайного числа для элемента массива: ");
+int range = Convert.ToInt32(Console.ReadLine());
+
+//создаем массив с помощью вызова метода
+int[] array = GetRandomArray(8, range);
+//печатаем массив с помощью вызова метода
+WriteArrayToConsole(array);
+
+//метод создающий массив, заполненный случайными числами в заданном диапазоне. Принимает на вход длину массива и диапазон
+int[] GetRandomArray(int arrayLength, int rangeRandom)
+{
+//создаем новый экземпляр класса Random
+Random rnd = new Random();
+//создаем новый экземпляр массива заданной длины
+int[] arr = new int[arrayLength];
+
+//заполняем массив с помощью цикла и повторяющегося в нем вызова Next
+for (int i = 0; i < arr.Length; i++)
+{
+arr[i] = rnd.Next(0,rangeRandom + 1);
+}
+//возвращаем заполненный массив
+return arr;
+}
+
+//метод вывода массива в консоль
+void WriteArrayToConsole(int[] array)
+{
+Console.Clear();
+//такой способ вывода массива через открытие скобки, запятые и закрытие показался наиболее удобным, решил его не переделывать
+Console.Write("[");
+for (int i = 0; i < array.Length; i++)
+{
+Console.Write(array[i]);
+if(i != array.Length -1)
+Console.Write(",");
+}
+Console.WriteLine("]");
+}
